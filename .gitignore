@@ -1,0 +1,8 @@
+.DS_STORE
+.vscode/.*
+node_modules
+bower_components
+jspm_packages
+test/dist
+
+

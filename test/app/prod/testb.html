@@ -1,0 +1,41 @@
+<div class="signup-container">
+    <header>
+        <div class="text-wrapper">
+            <span class="title-zh" ng-class="lang.key == 'en' ? 'title-en' : ''" ng-bind="title"></span>
+            <span ng-show="lang.key != 'en'">Intelligent Service Management</span>
+        </div>
+        <div class="text-wrapper triangle-wrapper">
+            <div class="triangle"></div>
+        </div>
+        <div class="header-icon-wrapper">
+            <div class="home-user">
+                <div class="header-icon">
+                    <div class="pic"></div>
+                </div>
+                <span ng-bind="user.userName"></span>
+            </div>
+        </div>
+    </header>
+    <div class="help-container">
+        <div class="left-menu">
+            <div class="title">
+                <span class="icon-font">H</span>
+                <div class="ctt">
+                    <span ng-bind="'HOME_HELP_CENTER' | translate"></span>
+                    <span ng-show="lang.key != 'en'">elp center</span>
+                </div>
+            </div>
+            <div class="subTitle">
+                <div ng-repeat="sub in subMenu" class="sub-menu" ng-click="changeTab(sub)" ng-class="crrTab.id == sub.id ? 'actived' : ''">
+                    <span class="menu-name" ng-bind="sub.title"></span>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <div class="content">
+                <div class="title"><span ng-bind="crrTab.title"></span></div>
+                <iframe class="if-content" frameborder="0" name="helpSrc" id="helpSrc"></iframe>
+            </div>
+        </div>
+    </div>
+</div>
