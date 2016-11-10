@@ -46,14 +46,35 @@ Development.create(gulp, __dirname, {
             asserts:{
                 templ: {
                     src: 'src/**/*.tpl.html',
-                    //dist:'...',
+                    // testSrc: '...',
+                    // e2eSrc: '...',
+                    // watchSrc: '...'
+                    // dist: 'dist path',
+                    // buildDist:'build path',
+                    // releaseDist: 'release path',
+                    // depolyDist: 'depoly path'
                     loader: {
                         module:'development-assert-templ',
-                        // addation pipe works.
+                        // add pipe works for module tasks.
+                        pipe(stream, config, dist, gulp){ ... }
                         pipes: Pipe[] | (config, dist, gulp)=> Pipe[],
-                        // addation outpipe works.
                         output: OutputPipe[] | (stream, config, dist, gulp)=> OutputPipe[]
                     }
+                },
+                templb: {
+                    src: 'srcb/**/*.tpl.html',
+                    // testSrc: '...',
+                    // e2eSrc: '...',
+                    // watchSrc: '...'
+                    // dist: 'dist path',
+                    // buildDist:'build path',
+                    // releaseDist: 'release path',
+                    // depolyDist: 'depoly path'
+                    loader: 'development-assert-templ',
+                    // also can add pipe works for module tasks here.
+                    pipe(stream, config, dist, gulp){ ... }
+                    pipes: Pipe[] | (config, dist, gulp)=> Pipe[],
+                    output: OutputPipe[] | (stream, config, dist, gulp)=> OutputPipe[]
                 },
                 html: ['src/*.html', 'src/*.cshtml'],
                 json: 'src/**/*.json',
