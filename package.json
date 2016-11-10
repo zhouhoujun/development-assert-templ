@@ -1,6 +1,6 @@
 {
   "name": "development-assert-templ",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "template assert (html) tasks for development tools.",
   "main": "./lib/index.js",
   "typings": "./lib/index",
