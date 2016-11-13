@@ -59,8 +59,8 @@ export class TemplTasks implements IDynamicTasks {
                         spare: true,
                         quotes: true
                     }),
-                    (config) => ngHtml2Js({
-                        template: (<ITemplTaskOption>config.option).template ||
+                    (ctx) => ngHtml2Js({
+                        template: (<ITemplTaskOption>ctx.option).template ||
                         `
 import angular from 'angular';
 export default angular.module('<%= moduleName %>', []).run(['$templateCache', function($templateCache) {
@@ -75,11 +75,11 @@ export default angular.module('<%= moduleName %>', []).run(['$templateCache', fu
                     },
                     <IPipe>{
                         oper: Operation.deploy | Operation.release,
-                        toTransform: (config) => babel((<ITemplTaskOption>config.option).babelOption || { presets: ['es2015'] })
+                        toTransform: (ctx) => babel((<ITemplTaskOption>ctx.option).babelOption || { presets: ['es2015'] })
                     },
                     <IPipe>{
                         oper: Operation.deploy | Operation.release,
-                        toTransform: (config) => ngAnnotate((<ITemplTaskOption>config.option).ngAnnotate || { sourceMap: true, gulpWarnings: false })
+                        toTransform: (ctx) => ngAnnotate((<ITemplTaskOption>ctx.option).ngAnnotate || { sourceMap: true, gulpWarnings: false })
                     },
                     <IPipe>{
                         oper: Operation.deploy | Operation.release,
@@ -87,7 +87,7 @@ export default angular.module('<%= moduleName %>', []).run(['$templateCache', fu
                     },
                     <IPipe>{
                         oper: Operation.deploy | Operation.release,
-                        toTransform: (config) => sourcemaps.write((<ITemplTaskOption>config.option).sourceMaps ||  './sourcemaps')
+                        toTransform: (ctx) => sourcemaps.write((<ITemplTaskOption>ctx.option).sourceMaps ||  './sourcemaps')
                     }
                 ]
             },
