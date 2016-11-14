@@ -1,7 +1,7 @@
 import * as mocha from 'mocha';
 import { expect, assert } from 'chai';
 
-import { Operation, ITask, bindingConfig, ITaskConfig, runTaskSequence } from 'development-core';
+import { ITask, bindingConfig, runTaskSequence } from 'development-core';
 import * as gulp from 'gulp';
 import * as templtasks from '../src';
 import * as fs from 'fs';
@@ -34,7 +34,7 @@ describe('template tasks', () => {
         // expect(cfg.getSrc()).eq('./app/*.html');
 
         await runTaskSequence(gulp, tasks, cfg);
-        expect(fs.existsSync(path.resolve(root, 'dist/dev/testa.js'))).eq(true);
+        expect(fs.existsSync(path.join(root, 'dist/dev/testa.js'))).eq(true);
         expect(fs.readFileSync(path.join(root, 'dist/dev/testa.js'), 'utf8').indexOf("import angular from 'angular';")).gt(0);
 
     });

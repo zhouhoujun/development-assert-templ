@@ -56,9 +56,9 @@ Development.create(gulp, __dirname, {
                     loader: {
                         module:'development-assert-templ',
                         // add pipe works for module tasks.
-                        pipe(stream, config, dist, gulp){ ... }
-                        pipes: Pipe[] | (config, dist, gulp)=> Pipe[],
-                        output: OutputPipe[] | (stream, config, dist, gulp)=> OutputPipe[]
+                        pipe(stream, ctx, dist, gulp){ ... }
+                        pipes: Pipe[] | (ctx, dist, gulp)=> Pipe[],
+                        output: OutputPipe[] | (stream, ctx, dist, gulp)=> OutputPipe[]
                     }
                 },
                 templb: {
@@ -72,9 +72,9 @@ Development.create(gulp, __dirname, {
                     // depolyDist: 'depoly path'
                     loader: 'development-assert-templ',
                     // also can add pipe works for module tasks here.
-                    pipe(stream, config, dist, gulp){ ... }
-                    pipes: Pipe[] | (config, dist, gulp)=> Pipe[],
-                    output: OutputPipe[] | (stream, config, dist, gulp)=> OutputPipe[]
+                    pipe(stream, ctx, dist, gulp){ ... }
+                    pipes: Pipe[] | (ctx, dist, gulp)=> Pipe[],
+                    output: OutputPipe[] | (stream, ctx, dist, gulp)=> OutputPipe[]
                 },
                 html: ['src/*.html', 'src/*.cshtml'],
                 json: 'src/**/*.json',

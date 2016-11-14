@@ -3,11 +3,12 @@ import * as gulp from 'gulp';
 import { Development } from 'development-tool';
 // import 'development-tool-node';
 
-Development.create(gulp, __dirname, {
-    tasks: {
+Development.create(gulp, __dirname, [
+    {
         src: 'src',
         dist: 'lib',
+        buildDist: 'build',
         testSrc: 'test/**/*.spec.ts',
         loader: 'development-tool-node'
     }
-});
+]);
