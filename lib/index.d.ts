@@ -1,5 +1,12 @@
-import { IDynamicTaskOption, IDynamicTasks } from 'development-core';
-export interface ITemplTaskOption {
+import { IDynamicTaskOption, IAsserts, IDynamicTasks } from 'development-core';
+/**
+ * templ assert task option.
+ *
+ * @export
+ * @interface ITemplTaskOption
+ * @extends {IAsserts}
+ */
+export interface ITemplTaskOption extends IAsserts {
     /**
      * js template for html.
      *

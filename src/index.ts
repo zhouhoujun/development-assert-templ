@@ -1,4 +1,4 @@
-import { IDynamicTaskOption, IPipe, Operation, IDynamicTasks, dynamicTask } from 'development-core';
+import { IDynamicTaskOption, IPipe, IAsserts, Operation, IDynamicTasks, dynamicTask } from 'development-core';
 // import * as chalk from 'chalk';
 import * as path from 'path';
 const cache = require('gulp-cached');
@@ -10,7 +10,14 @@ const htmlMin = require('gulp-minify-html');
 const ngHtml2Js = require('gulp-ng-html2js');
 const ngAnnotate = require('gulp-ng-annotate');
 
-export interface ITemplTaskOption {
+/**
+ * templ assert task option.
+ * 
+ * @export
+ * @interface ITemplTaskOption
+ * @extends {IAsserts}
+ */
+export interface ITemplTaskOption extends IAsserts {
     /**
      * js template for html.
      * 
@@ -43,6 +50,7 @@ export interface ITemplTaskOption {
      */
     sourceMaps: string;
 }
+
 @dynamicTask
 export class TemplTasks implements IDynamicTasks {
 
