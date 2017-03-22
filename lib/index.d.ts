@@ -8,12 +8,19 @@ import { IDynamicTaskOption, IAsserts, IDynamicTasks } from 'development-core';
  */
 export interface ITemplTaskOption extends IAsserts {
     /**
-     * js template for html.
+     * custom html template.
      *
      * @type {sring}
      * @memberOf ITemplTaskOption
      */
-    template: string;
+    template?: string;
+    /**
+     * default template for angular version. 1 or 2. default angular1 template
+     *
+     * @type {sring}
+     * @memberOf ITemplTaskOption
+     */
+    ngVersion?: number;
     /**
      * babel 6 option.
      *

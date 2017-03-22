@@ -1,63 +1,63 @@
 {
-  "name": "development-assert-templ",
-  "version": "0.4.1",
-  "description": "template assert (html) tasks for development tools.",
-  "main": "./lib/index.js",
-  "typings": "./lib/index",
-  "scripts": {
-    "gulp": "gulp",
-    "postinstall": "npm prune",
-    "reinstall": "npm cache clean && npm install",
-    "test": "gulp build test",
-    "prepublish": "gulp build --release",
-    "e2e": "protractor",
-    "e2e.live": "protractor --elementExplorer"
-  },
-  "keywords": [
-    "development",
-    "tool",
-    "gulp",
-    "angular",
-    "html",
-    "template",
-    "babel"
-  ],
-  "author": "houjun",
-  "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/zhouhoujun/development-assert-templ/issues"
-  },
-  "registry": "jspm",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/zhouhoujun/development-assert-templ.git"
-  },
-  "dependencies": {
-    "@types/lodash": "^4.14.37",
-    "babel-preset-es2015": "^6.18.0",
-    "development-core": "^0.10.0",
-    "gulp-babel": "^6.1.2",
-    "gulp-cached": "^1.1.0",
-    "gulp-minify-html": "^1.0.6",
-    "gulp-ng-annotate": "^2.0.0",
-    "gulp-ng-html2js": "0.2.2",
-    "gulp-plumber": "^1.1.0",
-    "gulp-sourcemaps": "^2.1.1",
-    "gulp-typescript": "^3.0.2",
-    "gulp-uglify": "^2.0.0",
-    "lodash": "^4.13.1"
-  },
-  "devDependencies": {
-    "development-tool": "^0.10.0",
-    "development-assert-ts": "^0.5.3",
-    "development-tool-node": "^0.6.2",
-    "bluebird": "^3.4.1",
-    "through2": "^2.0.1",
-    "ts-node": "^1.6.0",
-    "tslint": "^3.15.1",
-    "tslint-stylish": "^2.1.0-beta",
-    "typescript": "^2.0.3",
-    "zone.js": "^0.6.10"
-  },
-  "homepage": "https://github.com/zhouhoujun/development-assert-templ#readme"
+    "name": "development-assert-templ",
+    "version": "1.0.0",
+    "description": "template assert (html) tasks for development tools.",
+    "main": "./lib/index.js",
+    "typings": "./lib/index",
+    "scripts": {
+        "gulp": "gulp",
+        "postinstall": "npm prune",
+        "reinstall": "npm cache clean && npm install",
+        "test": "gulp build test",
+        "prepublish": "gulp build --release",
+        "e2e": "protractor",
+        "e2e.live": "protractor --elementExplorer"
+    },
+    "keywords": [
+        "development",
+        "tool",
+        "gulp",
+        "angular",
+        "html",
+        "template",
+        "babel"
+    ],
+    "author": "houjun",
+    "license": "MIT",
+    "bugs": {
+        "url": "https://github.com/zhouhoujun/development-assert-templ/issues"
+    },
+    "registry": "jspm",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zhouhoujun/development-assert-templ.git"
+    },
+    "dependencies": {
+        "@types/lodash": "^4.14.37",
+        "babel-preset-es2015": "^6.18.0",
+        "development-core": "^1.*",
+        "gulp-babel": "^6.1.2",
+        "gulp-cached": "^1.1.0",
+        "gulp-minify-html": "^1.0.6",
+        "gulp-ng-annotate": "^2.0.0",
+        "gulp-ng-html2js": "0.2.2",
+        "gulp-plumber": "^1.1.0",
+        "gulp-sourcemaps": "^2.*",
+        "gulp-typescript": "^3.*",
+        "gulp-uglify": "^2.*",
+        "lodash": "^4.*"
+    },
+    "devDependencies": {
+        "development-tool": "^1.*",
+        "development-assert-ts": "^1.*",
+        "development-tool-node": "^1.*",
+        "bluebird": "^3.4.1",
+        "through2": "^2.0.1",
+        "ts-node": "^3.*",
+        "tslint": "*",
+        "tslint-stylish": "*",
+        "typescript": "^2.2.1",
+        "zone.js": "*"
+    },
+    "homepage": "https://github.com/zhouhoujun/development-assert-templ#readme"
 }
