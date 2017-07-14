@@ -1,6 +1,6 @@
 {
     "name": "development-assert-templ",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "template assert (html) tasks for development tools.",
     "main": "./lib/index.js",
     "typings": "./lib/index",
@@ -33,9 +33,9 @@
         "url": "https://github.com/zhouhoujun/development-assert-templ.git"
     },
     "dependencies": {
-        "@types/lodash": "4.*",
+        "@types/lodash": "^4.14.68",
         "babel-preset-es2015": "^6.18.0",
-        "development-core": "^2.0.0",
+        "development-core": "^2.0.2",
         "gulp-babel": "^6.1.2",
         "gulp-cached": "^1.1.0",
         "gulp-minify-html": "^1.0.6",
@@ -44,20 +44,21 @@
         "gulp-plumber": "^1.1.0",
         "gulp-sourcemaps": "2.*",
         "gulp-typescript": "3.*",
-        "gulp-uglify": "2.*",
-        "lodash": "4.*"
+        "gulp-uglify": "3.*",
+        "lodash": "^4.17.4"
     },
     "devDependencies": {
-        "development-tool": "^2.0.0",
-        "development-assert-ts": "^2.0.0",
-        "development-tool-node": "^2.0.0",
         "bluebird": "^3.4.1",
+        "development-assert-ts": "^2.0.1",
+        "development-tool": "^2.0.3",
+        "development-tool-node": "^2.0.0",
         "through2": "^2.0.1",
-        "ts-node": "^3.*",
+        "ts-node": "^3.2.0",
         "tslint": "*",
         "tslint-stylish": "*",
-        "typescript": "^2.2.1",
+        "typescript": "*",
         "zone.js": "*"
     },
-    "homepage": "https://github.com/zhouhoujun/development-assert-templ#readme"
+    "homepage": "https://github.com/zhouhoujun/development-assert-templ#readme",
+    "false": {}
 }

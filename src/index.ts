@@ -1,4 +1,6 @@
-import { IDynamicTaskOption, IPipe, IAsserts, Operation, IDynamicTasks, dynamicTask } from 'development-core';
+import { ITaskInfo, ITaskContext, IAssertDist, Pipe, task, PipeTask, Operation, IAsserts } from 'development-core';
+import { Gulp } from 'gulp';
+import * as _ from 'lodash';
 // import * as chalk from 'chalk';
 import * as path from 'path';
 const cache = require('gulp-cached');
@@ -35,6 +37,14 @@ export interface ITemplTaskOption extends IAsserts {
     ngVersion?: number;
 
     /**
+     * uglify ng template js.
+     * 
+     * @type { boolean }
+     * @memberof ITemplTaskOption
+     */
+    uglify?: boolean;
+
+    /**
      * babel 6 option.
      * 
      * @type {*}
@@ -51,73 +61,76 @@ export interface ITemplTaskOption extends IAsserts {
     ngAnnotate: any;
 
     /**
-     * sourceMaps path.
+     * sourceMaps path. default no source maps.
      * 
-     * @type {string}
+     * @type {string | boolean}
      * @memberOf ITemplTaskOption
      */
-    sourceMaps: string;
+    sourceMaps: string | boolean;
 }
 
-@dynamicTask
-export class TemplTasks implements IDynamicTasks {
 
-    tasks(): IDynamicTaskOption[] {
-        return [
-            {
-                name: 'templ',
-                oper: Operation.default,
-                pipes: [
-                    () => cache('templ'),
-                    () => plumber(),
-                    () => htmlMin({
-                        empty: true,
-                        spare: true,
-                        quotes: true
-                    }),
-                    (ctx) => ngHtml2Js({
-                        template: (<ITemplTaskOption>ctx.option).template || (<ITemplTaskOption>ctx.option).ngVersion === 2 ?
-                            `
-import angular from 'angular';
-export default angular.module('<%= moduleName %>', []).run(['$templateCache', function($templateCache) {
-    $templateCache.put('<%= template.url %>',  '<%= template.prettyEscapedContent %>');
-}]);
-`
-                            : `
-import angular from 'angular';
-export default angular.module('<%= moduleName %>', []).run(['$templateCache', function($templateCache) {
-    $templateCache.put('<%= template.url %>',  '<%= template.prettyEscapedContent %>');
-}]);
-`
-                    }),
-
-                    <IPipe>{
-                        oper: Operation.deploy | Operation.release,
-                        toTransform: () => sourcemaps.init(),
-                    },
-                    <IPipe>{
-                        oper: Operation.deploy | Operation.release,
-                        toTransform: (ctx) => babel((<ITemplTaskOption>ctx.option).babelOption || { presets: ['es2015'] })
-                    },
-                    <IPipe>{
-                        oper: Operation.deploy | Operation.release,
-                        toTransform: (ctx) => ngAnnotate((<ITemplTaskOption>ctx.option).ngAnnotate || { sourceMap: true, gulpWarnings: false })
-                    },
-                    <IPipe>{
-                        oper: Operation.deploy | Operation.release,
-                        toTransform: () => uglify()
-                    },
-                    <IPipe>{
-                        oper: Operation.deploy | Operation.release,
-                        toTransform: (ctx) => sourcemaps.write((<ITemplTaskOption>ctx.option).sourceMaps || './sourcemaps')
-                    }
-                ]
-            },
-            {
-                name: 'templwatch',
-                oper: Operation.build,
-                watchTasks: ['templ']
-            }
-        ];
+@task({
+    oper: Operation.default | Operation.autoWatch
+})
+export class NgTemplateCompile extends PipeTask {
+    constructor(info: ITaskInfo) {
+        super(info)
     }
+
+    getInfo() {
+        this.info.name = this.info.name || 'ngTemlCompile';
+        return this.info;
+    }
+
+
+    pipes(ctx: ITaskContext, dist: IAssertDist, gulp?: Gulp): Pipe[] {
+        let option = ctx.option as ITemplTaskOption;
+        let pipes: Pipe[] = [
+            () => cache('templ'),
+            () => plumber(),
+            () => htmlMin({
+                empty: true,
+                spare: true,
+                quotes: true
+            }),
+            (ctx) => ngHtml2Js({
+                template: (<ITemplTaskOption>ctx.option).template || (<ITemplTaskOption>ctx.option).ngVersion === 2 ?
+                    `
+import angular from 'angular';
+export default angular.module('<%= moduleName %>', []).run(['$templateCache', function($templateCache) {
+    $templateCache.put('<%= template.url %>',  '<%= template.prettyEscapedContent %>');
+}]);
+`
+                    : `
+import angular from 'angular';
+export default angular.module('<%= moduleName %>', []).run(['$templateCache', function($templateCache) {
+    $templateCache.put('<%= template.url %>',  '<%= template.prettyEscapedContent %>');
+}]);
+`
+            }),
+            (ctx) => babel((<ITemplTaskOption>ctx.option).babelOption || { presets: ['es2015'] }),
+            (ctx) => ngAnnotate((<ITemplTaskOption>ctx.option).ngAnnotate || { sourceMap: true, gulpWarnings: false })
+        ];
+
+        if (option.sourceMaps === true) {
+            pipes.push(() => sourcemaps.init())
+        }
+
+        pipes = pipes.concat(super.pipes(ctx, dist, gulp));
+
+        if (option.uglify) {
+            pipes.push((ctx) => _.isBoolean(option.uglify) ? uglify() : uglify(option.uglify))
+
+        }
+
+
+        if (option.sourceMaps === true) {
+            let mappath = (_.isBoolean(option.sourceMaps) || !option.sourceMaps) ? './sourcemaps' : option.sourceMaps;
+            pipes.push((ctx) => sourcemaps.write(mappath));
+        }
+        return pipes;
+    }
+
 }
+

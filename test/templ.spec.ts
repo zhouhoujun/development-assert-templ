@@ -35,7 +35,7 @@ describe('template tasks', () => {
 
         await runTaskSequence(gulp, tasks, cfg);
         expect(fs.existsSync(path.join(root, 'dist/dev/testa.js'))).eq(true);
-        expect(fs.readFileSync(path.join(root, 'dist/dev/testa.js'), 'utf8').indexOf("import angular from 'angular';")).gt(0);
+        expect(fs.readFileSync(path.join(root, 'dist/dev/testa.js'), 'utf8').indexOf("import angular from 'angular';")).lt(0);
 
     });
 

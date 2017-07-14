@@ -1,4 +1,6 @@
-import { IDynamicTaskOption, IAsserts, IDynamicTasks } from 'development-core';
+/// <reference types="gulp" />
+import { ITaskInfo, ITaskContext, IAssertDist, Pipe, PipeTask, IAsserts } from 'development-core';
+import { Gulp } from 'gulp';
 /**
  * templ assert task option.
  *
@@ -22,6 +24,13 @@ export interface ITemplTaskOption extends IAsserts {
      */
     ngVersion?: number;
     /**
+     * uglify ng template js.
+     *
+     * @type { boolean }
+     * @memberof ITemplTaskOption
+     */
+    uglify?: boolean;
+    /**
      * babel 6 option.
      *
      * @type {*}
@@ -36,13 +45,15 @@ export interface ITemplTaskOption extends IAsserts {
      */
     ngAnnotate: any;
     /**
-     * sourceMaps path.
+     * sourceMaps path. default no source maps.
      *
-     * @type {string}
+     * @type {string | boolean}
      * @memberOf ITemplTaskOption
      */
-    sourceMaps: string;
+    sourceMaps: string | boolean;
 }
-export declare class TemplTasks implements IDynamicTasks {
-    tasks(): IDynamicTaskOption[];
+export declare class NgTemplateCompile extends PipeTask {
+    constructor(info: ITaskInfo);
+    getInfo(): ITaskInfo;
+    pipes(ctx: ITaskContext, dist: IAssertDist, gulp?: Gulp): Pipe[];
 }
